@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PhotoGallery.Models.Photo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Photos</h2>
+
+<p>
+    @Html.ActionLink("Upload a Photo", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Photo
+        </th>
+        <th>
+            Gallery
+        </th>
+        <th>
+            Uploaded by
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                
+                var filePath = item.Path + item.FileName;
+                <img style="height:100px;width:100px;" src="@filePath" />
+                <p>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Album.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.User.UserName)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <hr />
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Back to Home", "Index", "Home")
+</p>

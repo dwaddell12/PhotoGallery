@@ -1,0 +1,45 @@
+﻿@model PhotoGallery.Models.Photo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Photo</legend>
+
+    <div class="display-field">
+        @{
+            var filePath = this.Model.Path + this.Model.FileName;
+            <img src="@filePath"/>
+        }
+    </div>
+
+    <div class="display-label">
+        File Name
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FileName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Size)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Size)
+    </div>
+    <div class="display-label">
+        Uploaded by
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.UserName)
+    </div>
+    <div class="display-label">
+        Gallery
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Album.Name)
+        @*Html.ActionLink("Go to Gallery", "Details", new { id = Model.Album.Id })*@
+    </div>
+</fieldset>

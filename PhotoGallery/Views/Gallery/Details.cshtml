@@ -1,0 +1,54 @@
+﻿@model PhotoGallery.Models.Gallery
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+<fieldset>
+    <legend>Gallery</legend>
+    <table>
+        <tr>
+        @{
+            foreach (var item in Model.Photos)
+            {
+                <td>
+                @{
+                    var filePath = item.Path + item.FileName;
+                    <img style="height: 100px; width: 100px;" src="@filePath"/>
+                    <p>
+                        @Html.ActionLink("Details", "", "Photo/Details/" + item.Id) |
+                        @Html.ActionLink("Delete", "", "Photo/Delete/" + item.Id)
+                    </p>
+                }
+                </td>
+            }
+        }
+        </tr>
+    </table>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DateCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateCreated)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DateModified)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateModified)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to All Galleries", "Index")
+</p>

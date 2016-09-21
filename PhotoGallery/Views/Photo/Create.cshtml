@@ -1,0 +1,39 @@
+﻿@model PhotoGallery.Models.Photo
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Upload</h2>
+
+@using (Html.BeginForm("Create", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Photo</legend>
+
+        <div>
+            Upload File: <input  type="file" name="userFileUpload" />
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.Album)
+            @*@Html.DropDownListFor(model => model.AlbumSelect, Model.AlbumSelect, "Select a Gallery...")*@
+            @Html.DropDownList("AlbumGallery", new SelectList(Model.AlbumSelect, "Value", "Text"), "Select a Gallery...")
+            @Html.ActionLink("Or create a new one...", "Create", "Gallery")
+        </div>
+    </fieldset>
+    <p>
+        <input type="submit" value="Upload" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to All Photos", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
